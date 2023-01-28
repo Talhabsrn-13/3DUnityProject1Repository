@@ -21,6 +21,7 @@ namespace UdemyProject1.Controllers
             {
                 _finishFirework.gameObject.SetActive(true);
                 _finishLigth.gameObject.SetActive(true);
+                GameManager.Instance.MissionSucced();
             }
             else
             {

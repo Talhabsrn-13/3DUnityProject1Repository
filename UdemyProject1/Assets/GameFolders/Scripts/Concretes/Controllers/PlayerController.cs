@@ -38,10 +38,12 @@ namespace UdemyProject1.Controllers
         private void OnEnable()
         {
             GameManager.Instance.OnGameOver += HandleOnEvnetTriggered;
+            GameManager.Instance.OnMissionSucced += HandleOnEvnetTriggered;
         }
         private void OnDisable()
         {
             GameManager.Instance.OnGameOver -= HandleOnEvnetTriggered;
+            GameManager.Instance.OnMissionSucced -= HandleOnEvnetTriggered;
         }
 
         private void Update()
