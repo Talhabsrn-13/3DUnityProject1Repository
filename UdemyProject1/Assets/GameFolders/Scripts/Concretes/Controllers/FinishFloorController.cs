@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UdemyProject1.Managers;
 namespace UdemyProject1.Controllers
 {
     public class FinishFloorController : MonoBehaviour
@@ -24,7 +25,7 @@ namespace UdemyProject1.Controllers
             else
             {
                 //gameover
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                GameManager.Instance.GameOver();
             }
         }
     }

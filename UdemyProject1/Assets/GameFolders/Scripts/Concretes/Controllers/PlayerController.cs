@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UdemyProject1.Inputs;
+using UdemyProject1.Managers;
 using UdemyProject1.Movements;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ namespace UdemyProject1.Controllers
 
         bool _canForceUp;
         float _leftRight;
+        bool _canMove;
 
         public float TurnSpeed => _turnSpeed;
         public float Force => _force;
@@ -29,9 +31,23 @@ namespace UdemyProject1.Controllers
             _rotator = new Rotator(this);
             _fuel = GetComponent<Fuel>();
         }
+        private void Start()
+        {
+            _canMove = true;
+        }
+        private void OnEnable()
+        {
+            GameManager.Instance.OnGameOver += HandleOnEvnetTriggered;
+        }
+        private void OnDisable()
+        {
+            GameManager.Instance.OnGameOver -= HandleOnEvnetTriggered;
+        }
+
         private void Update()
         {
             //inputlar alýnýr
+            if (!_canMove) return;
 
             if (_input.IsForceUp && !_fuel.IsEmpty)
             {
@@ -56,6 +72,12 @@ namespace UdemyProject1.Controllers
             _rotator.FixedTick(_leftRight);
         }
 
-
+        private void HandleOnEvnetTriggered()
+        {
+            _canMove = false;
+            _canForceUp = false;
+            _leftRight = 0;
+            _fuel.FuelIncrease(0f);
+        }
     }
 }
