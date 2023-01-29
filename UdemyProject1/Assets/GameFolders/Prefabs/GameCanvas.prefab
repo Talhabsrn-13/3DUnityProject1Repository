@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 574400801425247465, guid: 2295836eb5a52074aa976f3211c59ccb, type: 3}
       propertyPath: m_Name
-      value: MainCanvas
+      value: GameCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 1368498045661448064, guid: 2295836eb5a52074aa976f3211c59ccb, type: 3}
       propertyPath: m_Pivot.x
