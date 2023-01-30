@@ -1,32 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using UdemyProject1.Abstracts.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 namespace UdemyProject1.Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : SingleteonThisObject<GameManager>
     {
         public event System.Action OnGameOver;
         public event System.Action OnMissionSucced;
-
-        public static GameManager Instance { get; private set; }
-       
         private void Awake()
         {
-            SingletonThisGameObject();
+            SingletonThisGameObject(this);
         }
-
-        private void SingletonThisGameObject()
+        private void Start()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(this.gameObject);
-            }
-            else
-            {
-                Destroy(this.gameObject);
-            }
+            SoundManager.Instance.PlaySound(1);
         }
         public void GameOver()
         {
@@ -47,15 +36,20 @@ namespace UdemyProject1.Managers
         private IEnumerator LoadLevelSceneAsync(int levelIndex)
         {
             //0sa restart 1 ise bi sonraki bolume gec 
+            SoundManager.Instance.StopSound(1);
             yield return SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + levelIndex);
+            SoundManager.Instance.PlaySound(2);
         }
         public void LoadMenuScene()
         {
             StartCoroutine(LoadMenuSceneAsync());
+           
         }
         public IEnumerator LoadMenuSceneAsync()
         {
+            SoundManager.Instance.StopSound(2);
             yield return SceneManager.LoadSceneAsync("Menu");
+            SoundManager.Instance.PlaySound(1);
         }
         public void Exit()
         {
