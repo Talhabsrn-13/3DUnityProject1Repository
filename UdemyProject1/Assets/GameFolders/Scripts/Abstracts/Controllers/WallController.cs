@@ -16,6 +16,7 @@ namespace UdemyProject1.Abstracts.Controllers
             if (player != null && player.CanMove)
             {
                 GameManager.Instance.GameOver();
+                player.ExplosionEffect();
             }
         }
     }

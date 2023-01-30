@@ -10,7 +10,7 @@ namespace UdemyProject1.Controllers
 
     public class PlayerController : MonoBehaviour
     {
-
+        [SerializeField] ParticleSystem _expolisonParticle;
         [SerializeField] float _turnSpeed = 180f;
         [SerializeField] float _force = 55f;
         DefaultInput _input;
@@ -33,6 +33,10 @@ namespace UdemyProject1.Controllers
             _mover = new Mover(this);
             _rotator = new Rotator(this);
             _fuel = GetComponent<Fuel>();
+            if (_expolisonParticle.isPlaying)
+            {
+                _expolisonParticle.Stop();
+            }
         }
         private void Start()
         {
@@ -76,7 +80,10 @@ namespace UdemyProject1.Controllers
 
             _rotator.FixedTick(_leftRight);
         }
-
+        public void ExplosionEffect()
+        { 
+            _expolisonParticle.Play();
+        }
         private void HandleOnEvnetTriggered()
         {
             _canMove = false;
