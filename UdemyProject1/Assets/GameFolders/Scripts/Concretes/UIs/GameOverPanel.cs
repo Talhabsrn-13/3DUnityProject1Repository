@@ -7,9 +7,9 @@ namespace UdemyProject1.UIs
 {
     public class GameOverPanel : MonoBehaviour
     {
-       public void YesClicked()
+        public void YesClicked()
         {
-            GameManager.Instance.LoadLevelScene( );
+            GameManager.Instance.LoadLevelScene();
         }
         public void NoClicked()
         {

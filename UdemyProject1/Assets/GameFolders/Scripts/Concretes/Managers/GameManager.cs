@@ -40,10 +40,6 @@ namespace UdemyProject1.Managers
         {
             OnMissionSucced?.Invoke();
         }
-        public void LoadLevelScene()
-        {
-
-        }
         public void LoadLevelScene(int levelIndex = 0)
         {
             StartCoroutine(LoadLevelSceneAsync(levelIndex));
